@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music Reviews</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Swiper Carousel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+  <h1>Music Reviews</h1>
+
+  <form id="reviewForm">
+    <input placeholder="Artist" id="artist" required />
+    <input placeholder="Album" id="album" required />
+    <input placeholder="Genre" id="genre" required />
+    <input type="number" placeholder="Score (1-10)" id="score" required />
+    <textarea placeholder="Description" id="description"></textarea>
+    <button type="submit">Save Review</button>
+  </form>
+
+  <h2>Reviews</h2>
+  <div id="reviews"></div>
+
+  <h2>Album Art</h2>
+  <div class="swiper">
+    <div class="swiper-wrapper" id="carousel"></div>
+  </div>
+
+  <h2>Scores by Genre</h2>
+  <canvas id="chart"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
