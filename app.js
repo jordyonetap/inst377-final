@@ -39,11 +39,11 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const review = {
-    artist: artist.value,
-    album: album.value,
-    genre: genre.value,
-    score: score.value,
-    description: description.value
+    artist_name: document.getElementById("artist").value,
+    album_name: document.getElementById("album").value,   
+    genre: document.getElementById("genre").value,
+    score: document.getElementById("score").value,
+    review: document.getElementById("description").value   
   };
 
   await fetch("/api/addReview", {
