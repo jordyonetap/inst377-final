@@ -184,7 +184,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 /* Swiper */
 .swiper {
   width: 100%;
-  height: 320px;
+  height: 100%;
   border-radius: 12px;
   overflow: hidden;
 }
