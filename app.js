@@ -15,9 +15,9 @@ async function loadReviews() {
   for (let r of data) {
     reviewsDiv.innerHTML += `
       <div>
-        <h3>${r.artist} - ${r.album}</h3>
+        <h3>${r.artist_name} - ${r.album_name}</h3>
         <p>${r.genre} | Score: ${r.score}</p>
-        <p>${r.description}</p>
+        <p>${r.review}</p>
       </div>
     `;
 
