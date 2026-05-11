@@ -6,6 +6,8 @@ async function loadReviews() {
   const res = await fetch("/api/getReviews");
   const data = await res.json();
 
+  console.log(data);
+
   reviewsDiv.innerHTML = "";
 
   let genreScores = {};
