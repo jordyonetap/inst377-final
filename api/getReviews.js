@@ -1,3 +1,5 @@
+//api call 2: add review to supabase
+
 export default async function handler(req, res) {
   const response = await fetch(
     "https://fwifqkstdrmiocaghqzs.supabase.co/rest/v1/Music Reviews",

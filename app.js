@@ -15,6 +15,7 @@ async function loadReviews() {
   data.sort((a, b) => a.artist_name.localeCompare(b.artist_name));
 
   reviewsDiv.innerHTML = "";
+  document.getElementById("carousel").innerHTML = "";
 
   let genreScores = {};
 
@@ -25,6 +26,8 @@ async function loadReviews() {
       year: "numeric", month: "short", day: "numeric"
     });
 
+
+    // review card html 
     reviewsDiv.innerHTML += `
       <div class="review-card">
         <div class="review-card-header">
@@ -48,14 +51,12 @@ async function loadReviews() {
       genreScores[r.genre] = [];
     }
     genreScores[r.genre].push(score);
-
     loadAlbumArt(r.artist_name, r.album_name);
   }
 
   buildChart(genreScores);
 }
 
-// Save review
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const btn = form.querySelector("button");
@@ -82,34 +83,47 @@ form.addEventListener("submit", async (e) => {
   loadReviews();
 });
 
-// Album art via MusicBrainz + Cover Art
+
+
 async function loadAlbumArt(artist, album) {
-  const search = await fetch(
-    `https://musicbrainz.org/ws/2/release-group?query=artist:"${artist}" AND release:"${album}"&fmt=json`
-  );
-  const data = await search.json();
+  try {
+    const res = await fetch(
+      `/api/getAlbumArt?artist=${encodeURIComponent(artist)}&album=${encodeURIComponent(album)}`
+    );
+    const data = await res.json();
+    if (data.error || !data.artUrl) return;
 
-  const rg = data["release-groups"]?.[0];
-  if (!rg) return;
+    const slide = document.createElement("div");
+    slide.className = "swiper-slide";
+    slide.innerHTML = `
+      <div class="slide-inner">
+        <img src="${data.artUrl}" alt="${data.album} by ${data.artist}" onerror="this.parentElement.parentElement.remove()">
+        <div class="slide-caption">
+          <span class="slide-artist">${data.artist}</span>
+          <span class="slide-album">${data.album}</span>
+        </div>
+      </div>
+    `;
+    document.getElementById("carousel").appendChild(slide);
 
-  const rel = await fetch(
-    `https://musicbrainz.org/ws/2/release?release-group=${rg.id}&fmt=json`
-  );
-  const relData = await rel.json();
-
-  const release = relData.releases?.[0];
-  if (!release) return;
-
-  const slide = document.createElement("div");
-  slide.className = "swiper-slide";
-  slide.innerHTML = `<img src="https://coverartarchive.org/release/${release.id}/front" width="300">`;
-  document.getElementById("carousel").appendChild(slide);
-
-  new Swiper('.swiper');
+    if (window._swiper) window._swiper.destroy(true, true);
+    window._swiper = new Swiper(".swiper", {
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  } catch (err) {
+    console.warn("Could not load album art for", artist, album);
+  }
 }
 
-// Chart.js
+// builds chart.js bar chart of avg score by genre
 function buildChart(genreScores) {
+  const existingChart = Chart.getChart("chart");
+  if (existingChart) existingChart.destroy();
+
   const labels = Object.keys(genreScores);
   const values = labels.map(g =>
     genreScores[g].reduce((a, b) => a + b) / genreScores[g].length

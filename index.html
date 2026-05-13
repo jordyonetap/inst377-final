@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Music Reviews</title>
+  <title>Music Reviews — Reviews</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Swiper Carousel -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 </head>
 
 <body>
-  <h1>Music Reviews</h1>
+  <nav class="site-nav">
+    <a class="nav-logo" href="home.html">🎵 SpinRate</a>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="index.html" class="active">Reviews</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+
+  <div class="page-header">
+    <h1>Reviews</h1>
+    <p class="page-subtitle">Log your discoveries here to share your anonymous opinion with others!</p>
+  </div>
+
 
   <form id="reviewForm">
-    <input placeholder="Artist" id="artist" required />
-    <input placeholder="Album" id="album" required />
-    <input placeholder="Genre" id="genre" required />
-    <input type="number" placeholder="Score (1-10)" id="score" required />
-    <textarea placeholder="Description" id="description"></textarea>
-    <button type="submit">Save Review</button>
+
+    <div class="form-row">
+      <input placeholder="Artist" id="artist" required />
+      <input placeholder="Album" id="album" required />
+    </div>
+
+    <div class="form-row">
+      <input placeholder="Genre" id="genre" required />
+      <input type="number" placeholder="Score (1-10)" id="score" min="1" max="10" required />
+    </div>
+
+    <textarea placeholder="Your review..." id="description"></textarea>
+    <button type="submit">Log Review</button>
   </form>
 
-  <h2>Reviews</h2>
+  <h2>All Reviews</h2>
   <div id="reviews"></div>
 
   <h2>Album Art</h2>
-<div class="swiper">
-  <div class="swiper-wrapper" id="carousel"></div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
-</div>
+  <div class="swiper">
+    <div class="swiper-wrapper" id="carousel"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
   <h2>Scores by Genre</h2>
   <canvas id="chart"></canvas>
 
