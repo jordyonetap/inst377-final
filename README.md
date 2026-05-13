@@ -8,3 +8,15 @@ Link To Developer Manual
 
 
 # Developer Manual
+
+## How to Install Application and all Dependencies
+
+**Please make sure that Visual Studio is installed, as well as Node.js.**
+
+To install all dependencies, you must run the following:
+
+```bash
+git clone https://github.com/jordyonetap/inst377-final.git
+cd inst377-final
+npm init -y
+```
