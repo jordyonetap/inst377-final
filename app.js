@@ -26,11 +26,14 @@ async function loadReviews() {
       year: "numeric", month: "short", day: "numeric"
     });
 
+    const cardId = `card-${r.artist_name}-${r.album_name}`.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9-]/g, "");
 
-    // review card html 
     reviewsDiv.innerHTML += `
-      <div class="review-card">
+      <div class="review-card" id="${cardId}">
         <div class="review-card-header">
+          <div class="review-art-slot" id="${cardId}-art">
+            <div class="art-placeholder"></div>
+          </div>
           <div class="review-title-block">
             <h3 class="review-artist">${r.artist_name}</h3>
             <span class="review-album">${r.album_name}</span>
@@ -51,12 +54,15 @@ async function loadReviews() {
       genreScores[r.genre] = [];
     }
     genreScores[r.genre].push(score);
-    loadAlbumArt(r.artist_name, r.album_name);
+
+    // Now calls our backend endpoint instead of MusicBrainz directly
+    loadAlbumArt(r.artist_name, r.album_name, cardId);
   }
 
   buildChart(genreScores);
 }
 
+// Save review
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const btn = form.querySelector("button");
@@ -83,15 +89,20 @@ form.addEventListener("submit", async (e) => {
   loadReviews();
 });
 
-
-
-async function loadAlbumArt(artist, album) {
+// Album art now fetched via our own backend endpoint (3rd fetch call)
+async function loadAlbumArt(artist, album, cardId) {
   try {
     const res = await fetch(
       `/api/getAlbumArt?artist=${encodeURIComponent(artist)}&album=${encodeURIComponent(album)}`
     );
     const data = await res.json();
     if (data.error || !data.artUrl) return;
+
+    // Inject into the review card art slot
+    const artSlot = document.getElementById(`${cardId}-art`);
+    if (artSlot) {
+      artSlot.innerHTML = `<img class="card-art" src="${data.artUrl}" alt="${album} cover" onerror="this.parentElement.innerHTML=''">`;
+    }
 
     const slide = document.createElement("div");
     slide.className = "swiper-slide";
@@ -119,7 +130,7 @@ async function loadAlbumArt(artist, album) {
   }
 }
 
-// builds chart.js bar chart of avg score by genre
+// Chart.js
 function buildChart(genreScores) {
   const existingChart = Chart.getChart("chart");
   if (existingChart) existingChart.destroy();
