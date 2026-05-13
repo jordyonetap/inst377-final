@@ -501,3 +501,31 @@ code {
   .about-grid { grid-template-columns: 1fr; }
   .form-row { flex-direction: column; }
 }
+
+/* Album Art in review card */
+.review-art-slot {
+  flex-shrink: 0;
+}
+ 
+.art-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+ 
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+ 
+.card-art {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--border);
+}
