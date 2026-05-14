@@ -110,12 +110,14 @@ For example ping ``` /api/getAlbumArt?artist=Radiohead&album=In_Rainbows```
 **Response:**
 
 ```json
-{
+[
+ {
   "releaseId": "6e335887-60ba-38f0-95af-fae7774336bf",
   "artUrl": "https://coverartarchive.org/release/6e335887-60ba-38f0-95af-fae7774336bf/front",
   "artist": "Radiohead",
   "album": "In Rainbows"
-}
+ }
+]
 ```
 
 ## Bugs and Future Roadmap
