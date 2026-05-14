@@ -19,8 +19,12 @@ Link To Developer Manual
 git clone https://github.com/jordyonetap/inst377-final.git
 cd inst377-final
 npm init -y
+npm install --save-dev jest
+npm install --save-dev babel-jest @babel/core @babel/preset-env
 ```
 This clones the repository to your machine, sets the folder path, and initializes npm (should have been installed with node.js)
+
+The two additional installs are optional, but are needed to run API tests. 
 
 ## How to run Application on a Vercel Server
 
@@ -38,6 +42,16 @@ This clones the repository to your machine, sets the folder path, and initialize
 > To make a change to the vercel server, simply commit your files to the Git repository. Make sure that it gets deployed on Vercel's end.
 
 ## How to run software tests
+
+**To run a test on the project's API calls, simply type
+```bash
+npm test
+```
+This runs all files ending in .test.js, returning results to if they work or not.
+
+Extra tests can be created, simply end the file name with .test.js
+
+Make sure that Jest is installed as well as Babel to make sure the syntax is working. 
 
 ## Server Application API
 
