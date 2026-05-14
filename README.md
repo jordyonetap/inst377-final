@@ -11,7 +11,7 @@ _This web app is intended for Chrome on Windows. Firefox, Safari, and Edge all a
 
 ## How to Install Application and all Dependencies
 
-**Please make sure that Visual Studio is installed, as well as Node.js.**
+**Please make sure that Visual Studio Code is installed, as well as Node.js.**
 
 > To install all dependencies, you must run the following:
 
@@ -33,7 +33,7 @@ The two additional installs are optional, but are needed to run API tests.
 2. Create a new repository
 3. Upload Content from inst377-final to GitHub repository
 4. Make a Vercel account and login
-5. Go to Projects -> Add New -> Projecta
+5. Go to Projects -> Add New -> Project
 6. Connect your GitHub account to Vercel
 7. Import the Git repository into your project
 8. Review all options, then press "Deploy"
@@ -55,11 +55,11 @@ Make sure that Jest is installed as well as Babel to make sure the syntax is wor
 
 ## Server Application API
 
-### `GET /api/reviews`
+### `GET /api/getReviews`
 
-### `POST /api/reviews`
+### `POST /api/addReview`
 
-### `POST /api/albumart`
+### `POST /api/getAlbumArt`
 
 ## Bugs and Future Roadmap
 
@@ -67,27 +67,33 @@ Make sure that Jest is installed as well as Babel to make sure the syntax is wor
 
 **Score Validation**
 
-The score does not accept any non-integer values. 
+**Problem:** The score does not accept any non-integer values. 
 
-Adjust the variable to be a float, not an integer.
+**Fix:** Adjust the variable to be a float, not an integer.
+
+----------
 
 **Album art failures**
 
-The third-party API for recieving album art is often down. If it returns no results for a given artist/album, the artwork section may display broken placeholders.
+**Problem:** The third-party API for recieving album art is often down. If it returns no results for a given artist/album, the artwork section may display broken placeholders.
 
-Add a fallback image in `getReviews.js`
+**Fix:** Add a fallback image in `getAlbumArt.js`
+
+----------
 
 **Updating Reviews**
 
-New reviews from other users are not displayed until the tab is refreshed
+**Problem:** New reviews from other users are not displayed until the tab is refreshed
 
-Force refresh page when a new response comes into the table
+**Fix:** Force refresh page when a new response comes into the table
+
+----------
 
 **Updating Average Scores**
 
-The genre average score does not update after a new review is submitted until the tab is refreshed.
+**Problem:** The genre average score does not update after a new review is submitted until the tab is refreshed.
 
-Force refresh page when a new response comes into the table
+**Fix:** Force refresh page when a new response comes into the table
 
 ----------
 ### **FUTURE ROADMAP**
