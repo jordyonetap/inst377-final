@@ -57,9 +57,65 @@ Make sure that Jest is installed as well as Babel to make sure the syntax is wor
 
 ### `GET /api/getReviews`
 
+Fetches all reviews from Supabase database
+
+**Parameters:** None
+
+**Response:** 
+```json
+[
+ {
+  "artist_name": "Radiohead",
+  "album_name": "In Rainbows",
+  "genre": "Rock",
+  "score": "9"
+  "review": "Their greatest album and a work of art."
+  "created_at": "2026-05-13T00:00:00.000Z"
+ }
+]
+```
+
 ### `POST /api/addReview`
 
+Writes a new review to Supabase database
+
+**Request:**
+
+```json
+[
+ {
+  "artist_name": "Radiohead",
+  "album_name": "In Rainbows",
+  "genre": "Rock",
+  "score": "9"
+  "review": "Their greatest album and a work of art."
+ }
+]
+```
+**Response:** Returns response gathered from Supabase database.
+
 ### `POST /api/getAlbumArt`
+
+Gets the album artwork for a specific album/artist combo. First finds the release ID thru MusicBrainz, then gets the image from Cover Art Archive.
+
+**Parameters:** 
+> ``` artist ``` type = string
+>> _Represents the name of the artist_
+
+> ``` album ``` type = string
+>> _Represents the name of the album_
+
+For example ping ``` /api/getAlbumArt?artist=Radiohead&album=In_Rainbows```
+
+**Response:**
+
+```json
+{
+  "releaseId": "6e335887-60ba-38f0-95af-fae7774336bf",
+  "artUrl": "https://coverartarchive.org/release/6e335887-60ba-38f0-95af-fae7774336bf/front",
+  "artist": "Radiohead",
+  "album": "In Rainbows"
+```
 
 ## Bugs and Future Roadmap
 
