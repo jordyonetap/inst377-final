@@ -4,7 +4,7 @@
 
 _This web app is intended for Chrome on Windows. Firefox, Safari, and Edge all appear to work as well, but thorough testing was not conducted on each._ 
 
-Link To Developer Manual
+[Link To Developer Manual](#Developer-Manual)
 
 
 # Developer Manual
