@@ -115,6 +115,7 @@ For example ping ``` /api/getAlbumArt?artist=Radiohead&album=In_Rainbows```
   "artUrl": "https://coverartarchive.org/release/6e335887-60ba-38f0-95af-fae7774336bf/front",
   "artist": "Radiohead",
   "album": "In Rainbows"
+}
 ```
 
 ## Bugs and Future Roadmap
@@ -156,9 +157,20 @@ For example ping ``` /api/getAlbumArt?artist=Radiohead&album=In_Rainbows```
 
 **High Priority**
 
+- **Real Time Updates** Fix issue with chart.js and incoming new reviews to have them update automatically without a page refresh
+- **Search Features** Improved abilities to look for specific reviews, sort by genre, score, artist, etc.
+
 **Medium Priority**
 
+- **Improved Navigation** Take the user directly to the review if album art is clicked on carousel
+- **Better Review Form** Make score and genre a dropdown menu with limited selections. Make sure all artist/albums are available on MusicBrainz.
+- **Album Art Failures** Add a placeholder image to display when nothing is returned from /api/getAlbumArt
+
 **Low Priority**
+
+- **Mobile Web Layout** Make accessible for mobile devices. Currently, the web app is meant to be used in chrome and also works thru firefox/safari.
+- **Comments on Reviews** Make it so people can comment their opinions on specific reviews
+- **Better Statistics** Show how many reviews a specific album has, genre has, etc.
 
 ----------
 
